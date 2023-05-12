@@ -2,7 +2,6 @@ from openmeteo_py.Utils.constants import *
 from openmeteo_py.Utils.timezones import *
 
 
-
 class FloodOptions():
     """
 
@@ -10,7 +9,8 @@ class FloodOptions():
     Time always starts at 0:00 today and contains 168 hours.
 
     """
-    def __init__(self, latitude, longitude,timeformat = iso8601,past_days = 0,forecast_days = 92,start_end = False,start_date = None,end_date = None,ensemble = False,cell_selection = nearest):
+
+    def __init__(self, latitude, longitude, timeformat=iso8601, past_days=0, forecast_days=92, start_end=False, start_date=None, end_date=None, ensemble=False, cell_selection=nearest):
         """
         Args:
             latitude (float): Latitude (Geographical WGS84 coordiante of the location).
@@ -25,8 +25,9 @@ class FloodOptions():
         if latitude < -90 or latitude > 90:
             raise ValueError("Latitude should be between -90 and 90 degrees.")
         if longitude < -180 or longitude > 180:
-            raise ValueError("Longitude should be between -180 and 180 degrees.")
-        
+            raise ValueError(
+                "Longitude should be between -180 and 180 degrees.")
+
         self.latitude = latitude
         self.longitude = longitude
         self.forecast_days = forecast_days
@@ -34,8 +35,8 @@ class FloodOptions():
         self.timeformat = timeformat
         self.cell_selection = cell_selection
         self.past_days = past_days
-        if start_end != False :
-                    self.start_date = start_date
-                    self.end_date = end_date
-                    self.start_end = start_end
+        if start_end is not False:
+            self.start_date = start_date
+            self.end_date = end_date
+            self.start_end = start_end
         self.start_end = start_end

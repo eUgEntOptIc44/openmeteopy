@@ -1,4 +1,5 @@
-from openmeteo_py.Exceptions import *
+from openmeteo_py.Exceptions import TypedList
+
 
 class DailyFlood():
 
@@ -9,7 +10,7 @@ class DailyFlood():
 
     """
 
-    def __init__(self) :
+    def __init__(self):
         self.daily_params = TypedList()
 
     def river_discharge(self):
@@ -21,17 +22,17 @@ class DailyFlood():
         """
         self.daily_params.append("river_discharge")
         return self
-    
+
     def river_discharge_mean(self):
         """
         Returns the Daily configuration object 
         :returns: `Hourly()`
 
-         	Daily maximum in UV Index starting from 0
+        Daily maximum in UV Index starting from 0
         """
         self.daily_params.append("river_discharge_mean")
         return self
-    
+
     def river_discharge_median(self):
         """
         Returns the Daily configuration object 
@@ -81,7 +82,7 @@ class DailyFlood():
         """
         self.daily_params.append("river_discharge_p75")
         return self
-    
+
     def all(self):
         """
         Returns the Daily configuration object 

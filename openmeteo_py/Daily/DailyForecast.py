@@ -1,7 +1,7 @@
-from openmeteo_py.Exceptions import *
+from openmeteo_py.Exceptions import TypedList
+
 
 class DailyForecast():
-
     """
     Daily Parameter functions
 
@@ -9,7 +9,7 @@ class DailyForecast():
 
     """
 
-    def __init__(self) :
+    def __init__(self):
         self.daily_params = TypedList()
 
     def temperature_2m_max(self):
@@ -17,21 +17,21 @@ class DailyForecast():
         Returns the Daily configuration object 
         :returns: `Hourly()`
 
-        Maximum  daily air temperature at 2 meters above ground
+        Maximum daily air temperature at 2 meters above ground
         """
         self.daily_params.append("temperature_2m_max")
         return self
-    
+
     def uv_index_max(self):
         """
         Returns the Daily configuration object 
         :returns: `Hourly()`
 
-         	Daily maximum in UV Index starting from 0
+        Daily maximum in UV Index starting from 0
         """
         self.daily_params.append("uv_index_max")
         return self
-    
+
     def uv_index_clear_sky_max(self):
         """
         Returns the Daily configuration object 
@@ -141,7 +141,7 @@ class DailyForecast():
         """
         self.daily_params.append("shortwave_radiation_sum")
         return self
-    
+
     def et0_fao_evapotranspiration(self):
         """
         Returns the Daily configuration object 
@@ -151,7 +151,7 @@ class DailyForecast():
         """
         self.daily_params.append("et0_fao_evapotranspiration")
         return self
-    
+
     def sunrise(self):
         """
         Returns the Daily configuration object 
@@ -161,7 +161,7 @@ class DailyForecast():
         """
         self.daily_params.append("sunrise")
         return self
-    
+
     def sunset(self):
         """
         Returns the Daily configuration object 
@@ -171,7 +171,7 @@ class DailyForecast():
         """
         self.daily_params.append("sunset")
         return self
-    
+
     def rain_sum(self):
         """
         Returns the Daily configuration object 
@@ -181,7 +181,7 @@ class DailyForecast():
         """
         self.daily_params.append("rain_sum")
         return self
-    
+
     def showers_sum(self):
         """
         Returns the Daily configuration object 
@@ -191,7 +191,7 @@ class DailyForecast():
         """
         self.daily_params.append("showers_sum")
         return self
-    
+
     def snowfall_sum(self):
         """
         Returns the Daily configuration object 
@@ -201,7 +201,7 @@ class DailyForecast():
         """
         self.daily_params.append("snowfall_sum")
         return self
-    
+
     def all(self):
         """
         Returns the Daily configuration object 
@@ -210,7 +210,7 @@ class DailyForecast():
         All parameters
         """
         self.daily_params.append_all([
-            "temperature_2m_max",                                                                             
+            "temperature_2m_max",
             "temperature_2m_min",
             "apparent_temperature_max",
             "apparent_temperature_min",

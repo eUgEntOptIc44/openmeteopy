@@ -15,7 +15,7 @@ class DailyJma(DailyMeteoFrance):
         Overriding the all method from HourlyMeteoFrance since windgust_10m_max is not provided in Jma
         """
         self.daily_params.append_all([
-            "temperature_2m_max",                                                                             
+            "temperature_2m_max",
             "temperature_2m_min",
             "apparent_temperature_max",
             "apparent_temperature_min",

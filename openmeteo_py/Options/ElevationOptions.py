@@ -2,7 +2,6 @@ from openmeteo_py.Utils.constants import *
 from openmeteo_py.Utils.timezones import *
 
 
-
 class ElevationOptions():
     """
 
@@ -10,6 +9,7 @@ class ElevationOptions():
     Time always starts at 0:00 today and contains 168 hours.
 
     """
+
     def __init__(self, latitude, longitude):
         """
         Args:
@@ -22,7 +22,8 @@ class ElevationOptions():
         if latitude < -90 or latitude > 90:
             raise ValueError("Latitude should be between -90 and 90 degrees.")
         if longitude < -180 or longitude > 180:
-            raise ValueError("Longitude should be between -180 and 180 degrees.")
-        
+            raise ValueError(
+                "Longitude should be between -180 and 180 degrees.")
+
         self.latitude = latitude
         self.longitude = longitude

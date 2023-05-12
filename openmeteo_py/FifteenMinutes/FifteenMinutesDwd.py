@@ -1,4 +1,5 @@
-from openmeteo_py.Exceptions import *
+from openmeteo_py.Exceptions import TypedList
+
 
 class FiftennMinutesDwd():
 
@@ -9,7 +10,7 @@ class FiftennMinutesDwd():
 
     """
 
-    def __init__(self) :
+    def __init__(self):
         self.minutes_15_params = TypedList()
 
     def shortwave_radiation(self):
@@ -21,7 +22,7 @@ class FiftennMinutesDwd():
         """
         self.minutes_15_params.append("shortwave_radiation")
         return self
-    
+
     def direct_normal_irradiance(self):
         """
         Returns the Daily configuration object 
@@ -121,7 +122,7 @@ class FiftennMinutesDwd():
         """
         self.minutes_15_params.append("cape")
         return self
-    
+
     def all(self):
         """
         Returns the Daily configuration object 
@@ -130,7 +131,7 @@ class FiftennMinutesDwd():
         All parameters
         """
         self.minutes_15_params.append_all([
-            "shortwave_radiation",                                                                             
+            "shortwave_radiation",
             "direct_radiation",
             "direct_normal_irradiance",
             "diffuse_radiation",

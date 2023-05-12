@@ -2,7 +2,6 @@ from openmeteo_py.Utils.constants import *
 from openmeteo_py.Utils.timezones import *
 
 
-
 class HistoricalOptions():
     """
 
@@ -10,7 +9,8 @@ class HistoricalOptions():
     Time always starts at 0:00 today and contains 168 hours.
 
     """
-    def __init__(self, latitude, longitude,elevation = nan,current_weather = False,temperature_unit = celsius,windspeed_unit =kmh ,  precipitation_unit = mm,timeformat = iso8601, timezone = UTC, start_date = None,end_date = None,cell_sellection = land):
+
+    def __init__(self, latitude, longitude, elevation=nan, current_weather=False, temperature_unit=celsius, windspeed_unit=kmh,  precipitation_unit=mm, timeformat=iso8601, timezone=UTC, start_date=None, end_date=None, cell_sellection=land):
         """
         Args:
             latitude (float): Latitude (Geographical WGS84 coordiante of the location).
@@ -29,8 +29,9 @@ class HistoricalOptions():
         if latitude < -90 or latitude > 90:
             raise ValueError("Latitude should be between -90 and 90 degrees.")
         if longitude < -180 or longitude > 180:
-            raise ValueError("Longitude should be between -180 and 180 degrees.")
-        
+            raise ValueError(
+                "Longitude should be between -180 and 180 degrees.")
+
         self.latitude = latitude
         self.longitude = longitude
         self.elevation = elevation

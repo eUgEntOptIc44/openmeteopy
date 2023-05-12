@@ -1,4 +1,5 @@
-from openmeteo_py.Exceptions import *
+from openmeteo_py.Exceptions import TypedList
+
 
 class DailyMarine():
 
@@ -9,7 +10,7 @@ class DailyMarine():
 
     """
 
-    def __init__(self) :
+    def __init__(self):
         self.daily_params = TypedList()
 
     def wave_height_max(self):
@@ -21,7 +22,7 @@ class DailyMarine():
         """
         self.daily_params.append("wave_height_max")
         return self
-    
+
     def wind_wave_height_max(self):
         """
         Returns the Daily configuration object 
@@ -31,7 +32,7 @@ class DailyMarine():
         """
         self.daily_params.append("wind_wave_height_max")
         return self
-    
+
     def swell_wave_height_max(self):
         """
         Returns the Daily configuration object 
@@ -121,7 +122,7 @@ class DailyMarine():
         """
         self.daily_params.append("swell_wave_peak_period_max")
         return self
-    
+
     def all(self):
         """
         Returns the Daily configuration object 
@@ -130,7 +131,7 @@ class DailyMarine():
         All parameters
         """
         self.daily_params.append_all([
-            "swell_wave_peak_period_max",                                                                             
+            "swell_wave_peak_period_max",
             "wind_wave_peak_period_max",
             "swell_wave_period_max",
             "wind_wave_period_max",

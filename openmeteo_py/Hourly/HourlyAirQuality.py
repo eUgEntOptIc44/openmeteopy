@@ -1,8 +1,7 @@
-from openmeteo_py.Exceptions import *
+from openmeteo_py.Exceptions import TypedList
 
 
-
-class HourlyAirQuality()  :
+class HourlyAirQuality():
 
     """
     Hourly Parameter functions
@@ -13,8 +12,7 @@ class HourlyAirQuality()  :
 
     """
 
-
-    def __init__(self) :
+    def __init__(self):
         self.hourly_params = TypedList()
 
     def pm10(self):
@@ -22,7 +20,7 @@ class HourlyAirQuality()  :
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
-         	Wave height of significant mean
+        Wave height of significant mean
         """
 
         self.hourly_params.append("pm10")
@@ -32,10 +30,10 @@ class HourlyAirQuality()  :
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
-        
+
         Relative humidity at 2 meters above ground
-        
         """
+
         self.hourly_params.append("pm2_5")
         return self
 
@@ -45,7 +43,6 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Dew point temperature at 2 meters above ground
-        
         """
 
         self.hourly_params.append("carbon_monoxide")
@@ -57,8 +54,6 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Wind wave height of significant mean
-
-        
         """
 
         self.hourly_params.append("nitrogen_dioxide")
@@ -70,7 +65,7 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Mean direction of wind waves
-        
+
         """
 
         self.hourly_params.append("sulphur_dioxide")
@@ -82,7 +77,6 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Period between mean wind waves
-        
         """
 
         self.hourly_params.append("ozone")
@@ -94,7 +88,6 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Peak period between wind waves.
-        
         """
 
         self.hourly_params.append("ammonia")
@@ -105,9 +98,7 @@ class HourlyAirQuality()  :
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
-        Swell  wave height of significant mean
-
-        
+        Swell wave height of significant mean
         """
 
         self.hourly_params.append("aerosol_optical_depth")
@@ -118,8 +109,7 @@ class HourlyAirQuality()  :
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
-         	Mean direction of swell waves
-        
+        Mean direction of swell waves
         """
 
         self.hourly_params.append("dust")
@@ -131,8 +121,6 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Period between mean swell waves
-
-        
         """
 
         self.hourly_params.append("uv_index")
@@ -144,13 +132,12 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("uv_index_clear_sky")
         return self
 
-#start 
+# start
 
     def alder_pollen(self):
         """
@@ -158,241 +145,216 @@ class HourlyAirQuality()  :
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("alder_pollen")
         return self
-    
+
     def birch_pollen(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("birch_pollen")
         return self
-    
+
     def grass_pollen(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("grass_pollen")
         return self
-    
+
     def mugwort_pollen(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("mugwort_pollen")
         return self
-    
+
     def olive_pollen(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("olive_pollen")
         return self
-    
+
     def ragweed_pollen(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("ragweed_pollen")
         return self
-    
+
     def european_aqi(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("european_aqi")
         return self
-    
+
     def european_aqi_pm2_5(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("european_aqi_pm2_5")
         return self
-    
+
     def european_aqi_pm10(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("european_aqi_pm10")
         return self
-    #end
-    
+    # end
+
     def european_aqi_no2(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("european_aqi_no2")
         return self
-    
+
     def european_aqi_o3(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("european_aqi_o3")
         return self
-    
+
     def european_aqi_so2(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("european_aqi_so2")
         return self
-    
+
     def us_aqi(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("us_aqi")
         return self
-    
+
     def us_aqi_pm2_5(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
+
         """
 
         self.hourly_params.append("us_aqi_pm2_5")
         return self
-    
-    def us_aqi_pm2_5(self):
-        """
-        Returns the Hourly configuration object 
-        :returns: `Hourly()`
 
-        Peak period between swell waves
-        
-        """
-
-        self.hourly_params.append("us_aqi_pm2_5")
-        return self
-    
     def us_aqi_pm10(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
+
         """
 
         self.hourly_params.append("us_aqi_pm10")
         return self
-    
+
     def us_aqi_no2(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
+
         """
 
         self.hourly_params.append("us_aqi_no2")
         return self
-    
+
     def us_aqi_o3(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
+
         """
 
         self.hourly_params.append("us_aqi_o3")
         return self
-    
+
     def us_aqi_so2(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
+
         """
 
         self.hourly_params.append("us_aqi_so2")
         return self
-    
+
     def us_aqi_co(self):
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
+
         """
 
         self.hourly_params.append("us_aqi_co")
         return self
-    
+
     def europe_air_quality_index(self):
         """
         Returns the Hourly configuration object 
@@ -402,14 +364,14 @@ class HourlyAirQuality()  :
         """
         self.hourly_params.append_all(
             [
-             "european_aqi",
-             "european_aqi_pm2_5",
-             "european_aqi_pm10",
-             "european_aqi_no2",
-             "european_aqi_o3",
-             "european_aqi_so2"])
+                "european_aqi",
+                "european_aqi_pm2_5",
+                "european_aqi_pm10",
+                "european_aqi_no2",
+                "european_aqi_o3",
+                "european_aqi_so2"])
         return self
-    
+
     def us_air_quality_index(self):
         """
         Returns the Hourly configuration object 
@@ -426,7 +388,7 @@ class HourlyAirQuality()  :
              "us_aqi_o3",
              "us_aqi_so2"])
         return self
-    
+
     def all(self):
         """
         Returns the Hourly configuration object 
@@ -441,7 +403,7 @@ class HourlyAirQuality()  :
              "nitrogen_dioxide",
              "sulphur_dioxide",
              "ozone,aerosol_optical_depth",
-             "dust","uv_index",
+             "dust", "uv_index",
              "uv_index_clear_sky",
              "ammonia",
              "alder_pollen",

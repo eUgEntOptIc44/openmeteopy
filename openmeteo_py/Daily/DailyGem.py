@@ -1,4 +1,5 @@
-from openmeteo_py.Exceptions import *
+from openmeteo_py.Exceptions import TypedList
+
 
 class DailyGem():
 
@@ -9,7 +10,7 @@ class DailyGem():
 
     """
 
-    def __init__(self) :
+    def __init__(self):
         self.daily_params = TypedList()
 
     def temperature_2m_max(self):
@@ -21,13 +22,13 @@ class DailyGem():
         """
         self.daily_params.append("temperature_2m_max")
         return self
-    
+
     def temperature_2m_min(self):
         """
         Returns the Daily configuration object 
         :returns: `Hourly()`
 
-         	Daily maximum in UV Index starting from 0
+        Daily maximum in UV Index starting from 0
         """
         self.daily_params.append("temperature_2m_min")
         return self
@@ -121,7 +122,7 @@ class DailyGem():
         """
         self.daily_params.append("shortwave_radiation_sum")
         return self
-    
+
     def et0_fao_evapotranspiration(self):
         """
         Returns the Daily configuration object 
@@ -131,7 +132,7 @@ class DailyGem():
         """
         self.daily_params.append("et0_fao_evapotranspiration")
         return self
-    
+
     def sunrise(self):
         """
         Returns the Daily configuration object 
@@ -141,7 +142,7 @@ class DailyGem():
         """
         self.daily_params.append("sunrise")
         return self
-    
+
     def sunset(self):
         """
         Returns the Daily configuration object 
@@ -151,7 +152,7 @@ class DailyGem():
         """
         self.daily_params.append("sunset")
         return self
-    
+
     def rain_sum(self):
         """
         Returns the Daily configuration object 
@@ -161,7 +162,7 @@ class DailyGem():
         """
         self.daily_params.append("rain_sum")
         return self
-    
+
     def showers_sum(self):
         """
         Returns the Daily configuration object 
@@ -171,7 +172,7 @@ class DailyGem():
         """
         self.daily_params.append("showers_sum")
         return self
-    
+
     def snowfall_sum(self):
         """
         Returns the Daily configuration object 

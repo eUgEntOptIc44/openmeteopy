@@ -1,7 +1,7 @@
-from openmeteo_py.Exceptions import *
+from openmeteo_py.Exceptions import TypedList
 
 
-class HourlyMarine()  :
+class HourlyMarine():
 
     """
     Hourly Parameter functions
@@ -12,8 +12,7 @@ class HourlyMarine()  :
 
     """
 
-
-    def __init__(self) :
+    def __init__(self):
         self.hourly_params = TypedList()
 
     def wave_height(self):
@@ -21,7 +20,7 @@ class HourlyMarine()  :
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
-         	Wave height of significant mean
+                Wave height of significant mean
         """
 
         self.hourly_params.append("wave_height")
@@ -31,9 +30,9 @@ class HourlyMarine()  :
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
-        
+
         Relative humidity at 2 meters above ground
-        
+
         """
         self.hourly_params.append("wave_direction")
         return self
@@ -44,7 +43,7 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Dew point temperature at 2 meters above ground
-        
+
         """
 
         self.hourly_params.append("wave_period")
@@ -56,8 +55,6 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Wind wave height of significant mean
-
-        
         """
 
         self.hourly_params.append("wind_wave_height")
@@ -69,7 +66,6 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Mean direction of wind waves
-        
         """
 
         self.hourly_params.append("wind_wave_direction")
@@ -81,7 +77,6 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Period between mean wind waves
-        
         """
 
         self.hourly_params.append("wind_wave_period")
@@ -93,7 +88,6 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Peak period between wind waves.
-        
         """
 
         self.hourly_params.append("wind_wave_peak_period")
@@ -105,8 +99,6 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Swell  wave height of significant mean
-
-        
         """
 
         self.hourly_params.append("swell_wave_height")
@@ -117,8 +109,7 @@ class HourlyMarine()  :
         Returns the Hourly configuration object 
         :returns: `Hourly()`
 
-         	Mean direction of swell waves
-        
+        Mean direction of swell waves
         """
 
         self.hourly_params.append("swell_wave_direction")
@@ -130,8 +121,6 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Period between mean swell waves
-
-        
         """
 
         self.hourly_params.append("swell_wave_period")
@@ -143,13 +132,11 @@ class HourlyMarine()  :
         :returns: `Hourly()`
 
         Peak period between swell waves
-        
         """
 
         self.hourly_params.append("swell_wave_peak_period")
         return self
 
-    
     def all(self):
         """
         Returns the Hourly configuration object 

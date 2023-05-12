@@ -30,7 +30,7 @@ class ForecastOptions():
             raise ValueError("Latitude should be between -90 and 90 degrees.")
         if longitude < -180 or longitude > 180:
             raise ValueError("Longitude should be between -180 and 180 degrees.")
-        
+
         self.latitude = latitude
         self.longitude = longitude
         self.windspeed_unit = windspeed_unit
@@ -39,10 +39,10 @@ class ForecastOptions():
         self.timezone = timezone
         self.current_weather = current_weather
         self.past_days = past_days
-        if start_end != False :
-                    self.start_date = start_date
-                    self.end_date = end_date
-                    self.start_end = start_end
+        if start_end is not False :
+            self.start_date = start_date
+            self.end_date = end_date
+            self.start_end = start_end
         self.start_end = start_end
         self.forecast_days = forecast_days
         self.cell_selection = cell_sellection

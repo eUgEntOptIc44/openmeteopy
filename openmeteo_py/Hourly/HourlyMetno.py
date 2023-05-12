@@ -1,8 +1,7 @@
 from openmeteo_py.Exceptions import *
 
 
-
-class HourlyMetno()  :
+class HourlyMetno():
 
     """
     Hourly Parameter functions
@@ -13,8 +12,7 @@ class HourlyMetno()  :
 
     """
 
-
-    def __init__(self) :
+    def __init__(self):
         self.hourly_params = TypedList()
 
     def temperature_2m(self):
@@ -32,9 +30,9 @@ class HourlyMetno()  :
         """
         Returns the Hourly configuration object 
         :returns: `Hourly()`
-        
+
         Relative humidity at 2 meters above ground
-        
+
         """
         self.hourly_params.append("relativehumidity_2m")
         return self
@@ -45,7 +43,7 @@ class HourlyMetno()  :
         :returns: `Hourly()`
 
         Dew point temperature at 2 meters above ground
-        
+
         """
 
         self.hourly_params.append("dewpoint_2m")
@@ -58,7 +56,7 @@ class HourlyMetno()  :
 
         Apparent temperature is the perceived feels-like tempertature combinding wind chill factor, realtive humidity and solar radition
 
-        
+
         """
 
         self.hourly_params.append("apparent_temperature")
@@ -70,7 +68,7 @@ class HourlyMetno()  :
         :returns: `Hourly()`
 
         Atmospheric air pressure reduced to sea level
-        
+
         """
 
         self.hourly_params.append("pressure_msl")
@@ -82,7 +80,7 @@ class HourlyMetno()  :
         :returns: `Hourly()`
 
         Total cloud cover as an area fraction
-        
+
         """
 
         self.hourly_params.append("cloudcover")
@@ -95,12 +93,11 @@ class HourlyMetno()  :
 
         Wind speed at 10 meters above ground. Wind speed on 10 meters is the standard level.
 
-        
+
         """
 
         self.hourly_params.append("windspeed_10m")
         return self
-
 
     def winddirection_10m(self):
         """
@@ -133,17 +130,6 @@ class HourlyMetno()  :
         """
 
         self.hourly_params.append("shortwave_radiation")
-        return self
-
-    def direct_radiation(self):
-        """
-        Returns the Hourly configuration object 
-        :returns: `Hourly()`
-
-        Direct solar radiation as average of the preceding hour
-        """
-
-        self.hourly_params.append("irect_radiation")
         return self
 
     def diffuse_radiation(self):
@@ -201,8 +187,6 @@ class HourlyMetno()  :
         self.hourly_params.append("weathercode")
         return self
 
-
-
     def snowfall(self):
         """
         Returns the Hourly configuration object 
@@ -212,7 +196,7 @@ class HourlyMetno()  :
         """
         self.hourly_params.append("snowfall")
         return self
-    
+
     def soil_moisture_27_81cm(self):
         """
         Returns the Hourly configuration object 
@@ -222,7 +206,7 @@ class HourlyMetno()  :
         """
         self.hourly_params.append("soil_moisture_27_81cm")
         return self
-    
+
     def direct_normal_irradiance(self):
         """
         Returns the Hourly configuration object 
@@ -232,7 +216,7 @@ class HourlyMetno()  :
         """
         self.hourly_params.append("direct_normal_irradiance")
         return self
-    
+
     def direct_radiation(self):
         """
         Returns the Hourly configuration object 
@@ -242,7 +226,7 @@ class HourlyMetno()  :
         """
         self.hourly_params.append("direct_radiation")
         return self
-    
+
     def all(self):
         """
         Returns the Hourly configuration object 
@@ -252,21 +236,21 @@ class HourlyMetno()  :
         """
         self.hourly_params.append_all(
             ["temperature_2m",
-            "relativehumidity_2m",
-            "dewpoint_2m",
-            "apparent_temperature",
-            "pressure_msl",
-            "surface_pressure",
-            "cloudcover",
-            "windspeed_10m",
-            "winddirection_10m",
-            "windgusts_10m",
-            "shortwave_radiation",
-            "direct_radiation",
-            "diffuse_radiation",
-            "vapor_pressure_deficit",
-            "et0_fao_evapotranspiration",
-            "precipitation",
-            "weathercode",
-            "snowfall"])
+             "relativehumidity_2m",
+             "dewpoint_2m",
+             "apparent_temperature",
+             "pressure_msl",
+             "surface_pressure",
+             "cloudcover",
+             "windspeed_10m",
+             "winddirection_10m",
+             "windgusts_10m",
+             "shortwave_radiation",
+             "direct_radiation",
+             "diffuse_radiation",
+             "vapor_pressure_deficit",
+             "et0_fao_evapotranspiration",
+             "precipitation",
+             "weathercode",
+             "snowfall"])
         return self

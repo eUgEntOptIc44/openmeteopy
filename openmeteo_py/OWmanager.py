@@ -6,10 +6,13 @@ Version: 1.0.0
 """
 
 import http.client
-import requests
 import json
+
 import pandas as pd
-from openmeteo_py import ApiCallError,FilepathNotFilled,FileOptionError
+import requests
+
+from openmeteo_py import ApiCallError, FileOptionError, FilepathNotFilled
+
 
 def patch_http_response_read(func):
     def inner(*args):
@@ -19,7 +22,10 @@ def patch_http_response_read(func):
             return e.partial
     return inner
 
-http.client.HTTPResponse.read = patch_http_response_read(http.client.HTTPResponse.read)
+
+http.client.HTTPResponse.read = patch_http_response_read(
+    http.client.HTTPResponse.read)
+
 
 class OWmanager():
 
@@ -38,10 +44,7 @@ class OWmanager():
     flood = "https://flood-api.open-meteo.com/v1/flood?"
     forecast = "https://api.open-meteo.com/v1/forecast?"
 
-
-
-    def __init__(self,options,api=None , hourly = None,daily = None, fifteen_minutes = None,api_key=None,):
-        
+    def __init__(self, options, api=None, hourly=None, daily=None, fifteen_minutes=None, api_key=None,):
         """
         Entry point class providing ad-hoc API clients for each OW web API.
 
@@ -51,252 +54,243 @@ class OWmanager():
             daily (Daily) : Daily parameter object.
             api_key (string) : commercial API key.
         """
-        #self.payload = {}
+        # self.payload = {}
         self.options = options
         self.hourly = hourly
         self.daily = daily
         self.fifteen_minutes = fifteen_minutes
-        if api != None :
+        if api is not None:
             self.url = api
-            if api == self.geocoding :
+            if api == self.geocoding:
                 self.payload = {
-            "name": options.name,
-            "count": options.count,
-            "format": options.format,
-            "language" : options.language
-            }
+                    "name": options.name,
+                    "count": options.count,
+                    "format": options.format,
+                    "language": options.language
+                }
             elif api == self.elevation:
                 self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude
-            }
-            elif api == self.marine:
+                    "latitude": options.latitude,
+                    "longitude": options.longitude
+                }
+            elif api == self.marine or api == self.gem:
                 self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "timezone": options.timezone,
-            "windspeed_unit":options.windspeed_unit,
-            "precipitation_unit":options.precipitation_unit,
-            "timeformat":options.timeformat,
-            "current_weather":options.current_weather,
-            "past_days":options.past_days
-            }
-            elif api == self.gem:
-                self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "timezone": options.timezone,
-            "windspeed_unit":options.windspeed_unit,
-            "precipitation_unit":options.precipitation_unit,
-            "timeformat":options.timeformat,
-            "current_weather":options.current_weather,
-            "past_days":options.past_days
-            }
+                    "latitude": options.latitude,
+                    "longitude": options.longitude,
+                    "timezone": options.timezone,
+                    "windspeed_unit": options.windspeed_unit,
+                    "precipitation_unit": options.precipitation_unit,
+                    "timeformat": options.timeformat,
+                    "current_weather": options.current_weather,
+                    "past_days": options.past_days
+                }
             elif api == self.metno:
-                if options.start_end :
+                if options.start_end:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "timezone": options.timezone,
-            "windspeed_unit":options.windspeed_unit,
-            "precipitation_unit":options.precipitation_unit,
-            "timeformat":options.timeformat,
-            "current_weather":options.current_weather,
-            "past_days":options.past_days,
-            "self.temperature_unit" : options.temperature_unit,
-            "start_date" : options.start_date ,
-            "end_date": options.end_date,
-            "cell_selection" : options.cell_selection
-            }
-                else :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "timezone": options.timezone,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "timeformat": options.timeformat,
+                        "current_weather": options.current_weather,
+                        "past_days": options.past_days,
+                        "self.temperature_unit": options.temperature_unit,
+                        "start_date": options.start_date,
+                        "end_date": options.end_date,
+                        "cell_selection": options.cell_selection
+                    }
+                else:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "timezone": options.timezone,
-            "windspeed_unit":options.windspeed_unit,
-            "precipitation_unit":options.precipitation_unit,
-            "timeformat":options.timeformat,
-            "current_weather":options.current_weather,
-            "past_days":options.past_days,
-            "self.temperature_unit" : options.temperature_unit,
-            "cell_selection" : options.cell_selection
-            }
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "timezone": options.timezone,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "timeformat": options.timeformat,
+                        "current_weather": options.current_weather,
+                        "past_days": options.past_days,
+                        "self.temperature_unit": options.temperature_unit,
+                        "cell_selection": options.cell_selection
+                    }
             elif api == self.flood:
-                if options.start_end :
+                if options.start_end:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days,
-            "forecast_days" : options.forecast_days,
-            "start_date" : options.start_date ,
-            "end_date": options.end_date,
-            "ensemble" : options.ensemble,
-            "cell_selection" : options.cell_selection
-            }
-                else :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "timeformat": options.timeformat,
+                        "past_days": options.past_days,
+                        "forecast_days": options.forecast_days,
+                        "start_date": options.start_date,
+                        "end_date": options.end_date,
+                        "ensemble": options.ensemble,
+                        "cell_selection": options.cell_selection
+                    }
+                else:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days,
-            "forecast_days" : options.forecast_days,
-            "ensemble" : options.ensemble,
-            "cell_selection" : options.cell_selection
-            }
-            elif api == self.meteofrance or api == self.jma or api == self.dwd_icon :
-                if options.start_end :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "timeformat": options.timeformat,
+                        "past_days": options.past_days,
+                        "forecast_days": options.forecast_days,
+                        "ensemble": options.ensemble,
+                        "cell_selection": options.cell_selection
+                    }
+            elif api == self.meteofrance or api == self.jma or api == self.dwd_icon:
+                if options.start_end:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "elevation" : options.elevation,
-            "timezone": options.timezone,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days,
-            "temperature_unit" : options.temperature_unit,
-            "current_weather":options.current_weather,
-            "windspeed_unit" : options.windspeed_unit,
-            "precipitation_unit": options.precipitation_unit,
-            "start_date" : options.start_date ,
-            "end_date": options.end_date,
-            "cell_selection" : options.cell_selection
-            }
-                else :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "elevation": options.elevation,
+                        "timezone": options.timezone,
+                        "timeformat": options.timeformat,
+                        "past_days": options.past_days,
+                        "temperature_unit": options.temperature_unit,
+                        "current_weather": options.current_weather,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "start_date": options.start_date,
+                        "end_date": options.end_date,
+                        "cell_selection": options.cell_selection
+                    }
+                else:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "elevation" : options.elevation,
-            "timeformat":options.timeformat,
-            "timezone": options.timezone,
-            "past_days":options.past_days,
-            "temperature_unit" : options.temperature_unit,
-            "current_weather":options.current_weather,
-            "windspeed_unit" : options.windspeed_unit,
-            "precipitation_unit": options.precipitation_unit,
-            "cell_selection" : options.cell_selection
-            }
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "elevation": options.elevation,
+                        "timeformat": options.timeformat,
+                        "timezone": options.timezone,
+                        "past_days": options.past_days,
+                        "temperature_unit": options.temperature_unit,
+                        "current_weather": options.current_weather,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "cell_selection": options.cell_selection
+                    }
             elif api == self.ecmwf:
-                if options.start_end :
+                if options.start_end:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "elevation" : options.elevation,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days,
-            "temperature_unit" : options.temperature_unit,
-            "current_weather":options.current_weather,
-            "windspeed_unit" : options.windspeed_unit,
-            "precipitation_unit": options.precipitation_unit,
-            "start_date" : options.start_date ,
-            "end_date": options.end_date,
-            "cell_selection" : options.cell_selection
-            }
-                else :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "elevation": options.elevation,
+                        "timeformat": options.timeformat,
+                        "past_days": options.past_days,
+                        "temperature_unit": options.temperature_unit,
+                        "current_weather": options.current_weather,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "start_date": options.start_date,
+                        "end_date": options.end_date,
+                        "cell_selection": options.cell_selection
+                    }
+                else:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "elevation" : options.elevation,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days,
-            "temperature_unit" : options.temperature_unit,
-            "current_weather":options.current_weather,
-            "windspeed_unit" : options.windspeed_unit,
-            "precipitation_unit": options.precipitation_unit,
-            "cell_selection" : options.cell_selection
-            }
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "elevation": options.elevation,
+                        "timeformat": options.timeformat,
+                        "past_days": options.past_days,
+                        "temperature_unit": options.temperature_unit,
+                        "current_weather": options.current_weather,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "cell_selection": options.cell_selection
+                    }
             elif api == self.forecast:
                 self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "timezone": options.timezone,
-            "windspeed_unit":options.windspeed_unit,
-            "precipitation_unit":options.precipitation_unit,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days
-            }
+                    "latitude": options.latitude,
+                    "longitude": options.longitude,
+                    "timezone": options.timezone,
+                    "windspeed_unit": options.windspeed_unit,
+                    "precipitation_unit": options.precipitation_unit,
+                    "timeformat": options.timeformat,
+                    "past_days": options.past_days
+                }
             elif api == self.gfs:
-                if options.start_end :
+                if options.start_end:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "elevation" : options.elevation,
-            "timezone": options.timezone,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days,
-            "temperature_unit" : options.temperature_unit,
-            "current_weather":options.current_weather,
-            "windspeed_unit" : options.windspeed_unit,
-            "precipitation_unit": options.precipitation_unit,
-            "forecast_days":options.forecast_days,
-            "start_date" : options.start_date ,
-            "end_date": options.end_date,
-            "cell_selection" : options.cell_selection
-            }
-                else :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "elevation": options.elevation,
+                        "timezone": options.timezone,
+                        "timeformat": options.timeformat,
+                        "past_days": options.past_days,
+                        "temperature_unit": options.temperature_unit,
+                        "current_weather": options.current_weather,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "forecast_days": options.forecast_days,
+                        "start_date": options.start_date,
+                        "end_date": options.end_date,
+                        "cell_selection": options.cell_selection
+                    }
+                else:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "elevation" : options.elevation,
-            "timeformat":options.timeformat,
-            "timezone": options.timezone,
-            "past_days":options.past_days,
-            "temperature_unit" : options.temperature_unit,
-            "current_weather":options.current_weather,
-            "windspeed_unit" : options.windspeed_unit,
-            "precipitation_unit": options.precipitation_unit,
-            "forecast_days":options.forecast_days,
-            "cell_selection" : options.cell_selection
-            }
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "elevation": options.elevation,
+                        "timeformat": options.timeformat,
+                        "timezone": options.timezone,
+                        "past_days": options.past_days,
+                        "temperature_unit": options.temperature_unit,
+                        "current_weather": options.current_weather,
+                        "windspeed_unit": options.windspeed_unit,
+                        "precipitation_unit": options.precipitation_unit,
+                        "forecast_days": options.forecast_days,
+                        "cell_selection": options.cell_selection
+                    }
             elif api == self.historical:
-                    self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "elevation" : options.elevation,
-            "timezone": options.timezone,
-            "timeformat":options.timeformat,
-            "temperature_unit" : options.temperature_unit,
-            "current_weather":options.current_weather,
-            "windspeed_unit" : options.windspeed_unit,
-            "precipitation_unit": options.precipitation_unit,
-            "start_date" : options.start_date ,
-            "end_date": options.end_date,
-            "cell_selection" : options.cell_selection
-            }
+                self.payload = {
+                    "latitude": options.latitude,
+                    "longitude": options.longitude,
+                    "elevation": options.elevation,
+                    "timezone": options.timezone,
+                    "timeformat": options.timeformat,
+                    "temperature_unit": options.temperature_unit,
+                    "current_weather": options.current_weather,
+                    "windspeed_unit": options.windspeed_unit,
+                    "precipitation_unit": options.precipitation_unit,
+                    "start_date": options.start_date,
+                    "end_date": options.end_date,
+                    "cell_selection": options.cell_selection
+                }
             elif api == self.air_quality:
-                if options.start_end :
+                if options.start_end:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "domains" : options.domains,
-            "timezone": options.timezone,
-            "timeformat":options.timeformat,
-            "past_days":options.past_days,
-            "start_date" : options.start_date ,
-            "end_date": options.end_date,
-            "cell_selection" : options.cell_selection
-            }
-                else :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "domains": options.domains,
+                        "timezone": options.timezone,
+                        "timeformat": options.timeformat,
+                        "past_days": options.past_days,
+                        "start_date": options.start_date,
+                        "end_date": options.end_date,
+                        "cell_selection": options.cell_selection
+                    }
+                else:
                     self.payload = {
-            "latitude": options.latitude,
-            "longitude": options.longitude,
-            "domains" : options.domains,
-            "timeformat":options.timeformat,
-            "timezone": options.timezone,
-            "past_days":options.past_days,
-            "cell_selection" : options.cell_selection
-            }
-        if self.daily != None :
+                        "latitude": options.latitude,
+                        "longitude": options.longitude,
+                        "domains": options.domains,
+                        "timeformat": options.timeformat,
+                        "timezone": options.timezone,
+                        "past_days": options.past_days,
+                        "cell_selection": options.cell_selection
+                    }
+        if self.daily is not None:
             self.payload['daily'] = ','.join(self.daily.daily_params)
-        if self.hourly != None :
+        if self.hourly is not None:
             self.payload['hourly'] = ','.join(self.hourly.hourly_params)
-        if self.fifteen_minutes != None :
-            self.payload['minutely_15'] = ','.join(self.fifteen_minutes.minutes_15_params)
-        if api_key != None:
+        if self.fifteen_minutes is not None:
+            self.payload['minutely_15'] = ','.join(
+                self.fifteen_minutes.minutes_15_params)
+        if api_key is not None:
             self.payload['apikey'] = api_key
             self.url = "https://customer-api.open-meteo.com/v1/forecast?"
-        self.payload = "&".join("%s=%s" % (k,v) for k,v in self.payload.items())
+        self.payload = "&".join("%s=%s" % (k, v)
+                                for k, v in self.payload.items())
 
-    def Jsonify(self,meteo):
+    def Jsonify(self, meteo):
         """Returns a json with each variable having keys as dates,result json otherwise
 
         Args:
@@ -329,26 +323,26 @@ class OWmanager():
                     data[meteo["hourly"]["time"][j]] = meteo['hourly'][i][j]
                 hourly[i] = data
             cleaned_data["hourly"] = hourly
-        elif "hourly" not in meteo and "daily" in meteo :
+        elif "hourly" not in meteo and "daily" in meteo:
             for i in meteo['daily']:
                 data = {}
                 for j in range(len(meteo['daily'][i])-1):
                     data[meteo["daily"]["time"][j]] = meteo['daily'][i][j]
                 daily[i] = data
             cleaned_data["daily"] = daily
-        else :
+        else:
             cleaned_data = meteo
-        if "minutely_15" in meteo  :
+        if "minutely_15" in meteo:
             for i in meteo['minutely_15']:
                 data = {}
                 for j in range(len(meteo['minutely_15'][i])-1):
-                    data[meteo["minutely_15"]["time"][j]] = meteo['minutely_15'][i][j]
+                    data[meteo["minutely_15"]["time"][j]
+                         ] = meteo['minutely_15'][i][j]
                 daily[i] = data
             cleaned_data["minutely_15"] = daily
         return cleaned_data
 
-
-    def get_data(self,output = 0,file = 0,filepath = None):
+    def get_data(self, output=0, file=0, filepath=None):
         """
         Handles the retrieval and processing of the OPEN-METEO data.
 
@@ -369,50 +363,51 @@ class OWmanager():
         """
 
         try:
-            r  = requests.get(self.url, params = self.payload)
-            if r.status_code != 200 and r.status_code != 400:
-                raise BaseException("Failed retrieving open-meteo data, server returned HTTP code: {} on following URL {}.".format(r.status_code, r.url))
-            if "reason" in r :
-                raise ApiCallError(r)
-            if file == 0 :
-                if output == 0 :
-                    return json.loads(r.content.decode('utf-8'))
-                elif output == 1 :
-                    return self.Jsonify(json.loads(r.content.decode('utf-8')))
-                elif output == 2 :
-                    return pd.DataFrame(json.loads(r.content.decode('utf-8')))
-                elif output == 3 :
-                    return self.dataframit(json.loads(r.content.decode('utf-8')))
-            elif file > 0 and file < 3 :
-                if filepath == None :
+            ow_req = requests.get(self.url, params=self.payload, timeout=20)
+            if ow_req.status_code != 200 and ow_req.status_code != 400:
+                raise BaseException(
+                    "Failed retrieving open-meteo data, server returned HTTP code: {} on following URL {}.".format(ow_req.status_code, ow_req.url))
+            if "reason" in ow_req:
+                raise ApiCallError(ow_req)
+            if file == 0:
+                if output == 0:
+                    return json.loads(ow_req.content.decode('utf-8'))
+                elif output == 1:
+                    return self.Jsonify(json.loads(ow_req.content.decode('utf-8')))
+                elif output == 2:
+                    return pd.DataFrame(json.loads(ow_req.content.decode('utf-8')))
+                elif output == 3:
+                    return self.dataframit(json.loads(ow_req.content.decode('utf-8')))
+            elif file > 0 and file < 3:
+                if filepath is None:
                     raise FilepathNotFilled
-                if output == 0 :
+                if output == 0:
                     with open(filepath+'.json', 'wb+') as f:
-                        f.write(r.content)
-                    return json.loads(r.content.decode('utf-8'))
-                elif output == 1 :
+                        f.write(ow_req.content)
+                    return json.loads(ow_req.content.decode('utf-8'))
+                elif output == 1:
                     with open(filepath+'.json', 'wb+') as f:
-                        f.write(r.content)
-                    return self.Jsonify(json.loads(r.content.decode('utf-8')))
-                elif output == 2 :
-                    if file == 1 :
-                        pd.DataFrame(json.loads(r.content.decode('utf-8'))).to_csv(filepath+".csv")
-                        return pd.DataFrame(json.loads(r.content.decode('utf-8')))
-                    else :
-                        pd.DataFrame(json.loads(r.content.decode('utf-8'))).to_excel(filepath+".xlsx")
-                        return pd.DataFrame(json.loads(r.content.decode('utf-8')))
-                elif output == 3 :
-                    if file == 1 :
-                        return self.dataframit(json.loads(r.content.decode('utf-8')),file,filepath)
-                    else :
-                        return self.dataframit(json.loads(r.content.decode('utf-8')),file,filepath)
-            else :
+                        f.write(ow_req.content)
+                    return self.Jsonify(json.loads(ow_req.content.decode('utf-8')))
+                elif output == 2:
+                    if file == 1:
+                        pd.DataFrame(json.loads(ow_req.content.decode(
+                            'utf-8'))).to_csv(filepath+".csv")
+                        return pd.DataFrame(json.loads(ow_req.content.decode('utf-8')))
+                    else:
+                        pd.DataFrame(json.loads(ow_req.content.decode(
+                            'utf-8'))).to_excel(filepath+".xlsx")
+                        return pd.DataFrame(json.loads(ow_req.content.decode('utf-8')))
+                elif output == 3:
+                    return self.dataframit(json.loads(ow_req.content.decode('utf-8')), file, filepath)
+            else:
                 raise FileOptionError
-        except requests.ConnectionError as e :
-            raise(e)
-    
-    def dataframit(self,meteo,format = 0,filepath = None):
-        """Returns a dataframe with each variable having keys as dates,result dataframe otherwise
+        except requests.ConnectionError as e:
+            raise (e)
+
+    def dataframit(self, meteo, file_format=0, filepath=None):
+        """
+        Returns a dataframe with each variable having keys as dates, returns dataframe otherwise
 
         Args:
             meteo (Dict): JSON input
@@ -422,49 +417,54 @@ class OWmanager():
         """
 
         meteo = self.Jsonify(meteo)
-        if format == 0 :
-            if 'hourly' in meteo :
-                if 'daily' in meteo :
-                    return pd.DataFrame(meteo['hourly']),pd.DataFrame(meteo['daily'])
-                else :
+        if file_format == 0:
+            if 'hourly' in meteo:
+                if 'daily' in meteo:
+                    return pd.DataFrame(meteo['hourly']), pd.DataFrame(meteo['daily'])
+                else:
                     return pd.DataFrame(meteo['hourly'])
-            else :
-                if 'daily' in meteo :
+            else:
+                if 'daily' in meteo:
                     return pd.DataFrame(meteo['daily'])
-                else :
+                else:
                     return pd.DataFrame(meteo)
-        elif format == 1 :
-            if 'hourly' in meteo :
-                if 'daily' in meteo :
-                    pd.DataFrame(meteo['hourly']).to_csv(filepath+"_hourly.csv")
+        elif file_format == 1:
+            if 'hourly' in meteo:
+                if 'daily' in meteo:
+                    pd.DataFrame(meteo['hourly']).to_csv(
+                        filepath+"_hourly.csv")
                     pd.DataFrame(meteo['daily']).to_csv(filepath+"_daily.csv")
-                    return pd.DataFrame(meteo['hourly']),pd.DataFrame(meteo['daily'])
-                else :
-                    pd.DataFrame(meteo['hourly']).to_csv(filepath+"_hourly.csv")
+                    return pd.DataFrame(meteo['hourly']), pd.DataFrame(meteo['daily'])
+                else:
+                    pd.DataFrame(meteo['hourly']).to_csv(
+                        filepath+"_hourly.csv")
                     return pd.DataFrame(meteo['hourly'])
-            else :
-                if 'daily' in meteo :
+            else:
+                if 'daily' in meteo:
                     pd.DataFrame(meteo['daily']).to_csv(filepath+"_daily.csv")
                     return pd.DataFrame(meteo['daily'])
-                else :
+                else:
                     pd.DataFrame(meteo).to_csv(filepath+".csv")
                     return pd.DataFrame(meteo)
-        elif format == 2 :
-            if 'hourly' in meteo :
-                if 'daily' in meteo :
-                    pd.DataFrame(meteo['hourly']).to_excel(filepath+"_hourly.xlsx")
-                    pd.DataFrame(meteo['daily']).to_excel(filepath+"_daily.xlsx")
-                    return pd.DataFrame(meteo['hourly']),pd.DataFrame(meteo['daily'])
-                else :
-                    pd.DataFrame(meteo['hourly']).to_excel(filepath+"_hourly.xlsx")
+        elif file_format == 2:
+            if 'hourly' in meteo:
+                if 'daily' in meteo:
+                    pd.DataFrame(meteo['hourly']).to_excel(
+                        filepath+"_hourly.xlsx")
+                    pd.DataFrame(meteo['daily']).to_excel(
+                        filepath+"_daily.xlsx")
+                    return pd.DataFrame(meteo['hourly']), pd.DataFrame(meteo['daily'])
+                else:
+                    pd.DataFrame(meteo['hourly']).to_excel(
+                        filepath+"_hourly.xlsx")
                     return pd.DataFrame(meteo['hourly'])
-            else :
-                if 'daily' in meteo :
-                    pd.DataFrame(meteo['daily']).to_excel(filepath+"_daily.xlsx")
+            else:
+                if 'daily' in meteo:
+                    pd.DataFrame(meteo['daily']).to_excel(
+                        filepath+"_daily.xlsx")
                     return pd.DataFrame(meteo['daily'])
-                else :
+                else:
                     pd.DataFrame(meteo).to_excel(filepath+".xlsx")
                     return pd.DataFrame(meteo)
-        else :
+        else:
             raise FileOptionError
-
